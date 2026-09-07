@@ -25,6 +25,9 @@ android {
         python {
             version = "3.11"
             pip {
+                options "--trusted-host", "pypi.org"
+                options "--trusted-host", "files.pythonhosted.org"
+                
                 install("-r", "requirements.txt")
             }
         }
