@@ -10,7 +10,10 @@ workflows:
         script: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
       - name: Grant Execute Permission for Gradle
         script: chmod +x gradlew
-      - name: Build Release APK
-        script: ./gradlew assembleRelease
+      - name: Fix SSL and Build Release APK
+        script: |
+          # إجبار نظام بايثون على تخطي فحص شهادات الأمان المؤقت أثناء البناء
+          export PYTHONHTTPSVERIFY=0
+          ./gradlew assembleRelease
     artifacts:
       - app/build/outputs/apk/**/*.apk
